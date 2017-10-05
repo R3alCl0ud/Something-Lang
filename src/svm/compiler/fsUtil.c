@@ -21,20 +21,19 @@ void _closeFile(FILE *file) {
 
 char** _readAllLines(FILE *file) {
   int ls = 100, ti = 0;
-  char **lines = malloc(ls * sizeof(char*));
+  char **lines = calloc(ls, sizeof(char*));
   size_t len = 0;
   int readlen;
   while ((readlen = getline(&lines[ti], &len, file)) != -1) {
-    if (ti >= ls) {
+    if (ti >= ls - 1) {
       printf("resizing lines\n");
-      char **tempLines;
-      tempLines = realloc(lines, (ls *= 2) * sizeof(char*));
+      char **tempLines = realloc(lines, (ls *= 2) * sizeof(char*));
       if (tempLines == NULL){
         printf("something went wrong\nreturning early\n");
         break;
       }
+      printf("Adr lines:     0x%.8X\nAdr tempLines: 0x%.8X\n", lines, tempLines);
       lines = tempLines;
-      free(tempLines);
     }
     ti++;
   }
