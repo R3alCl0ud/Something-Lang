@@ -26,13 +26,13 @@ char** _readAllLines(FILE *file) {
   int readlen;
   while ((readlen = getline(&lines[ti], &len, file)) != -1) {
     if (ti >= ls - 1) {
-      printf("resizing lines\n");
+      printf("attempting resizing lines\n");
       char **tempLines = realloc(lines, (ls *= 2) * sizeof(char*));
       if (tempLines == NULL){
         printf("something went wrong\nreturning early\n");
         break;
       }
-      printf("Adr lines:     0x%.8X\nAdr tempLines: 0x%.8X\n", lines, tempLines);
+      printf("Adr lines:     0x%.16X\nAdr tempLines: 0x%.16X\n", lines, tempLines);
       lines = tempLines;
     }
     ti++;

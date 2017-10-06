@@ -4,7 +4,7 @@
 #include <string.h>
 #include "parser.h"
 
-int *parseLine(char *line) {
+int* parseLine(char *line) {
   int *bytes = malloc(sizeof(line));
 
   return bytes;

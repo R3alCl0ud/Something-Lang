@@ -3,14 +3,15 @@
 #include <regex.h>
 #include <string.h>
 #include "fsUtil.h"
+#include "parser.h"
 
-bool checkEndianness();
+int checkEndianness();
 
 int main(int argc, char **argv) {
   if (argc >= 4) {
-    bool bigEndian = checkEndianness();
-    int n = 1;
-    if (*(char*)&n == 1) big = false;
+    int bigEndian = checkEndianness();
+
+    printf("system uses the %sEndian byte order\n", bigEndian == 1 ? "big" : "little");
 
     // printf("%lu\n", sizeof(char*));
     FILE *in = _readFile(*++argv);
@@ -35,7 +36,7 @@ int main(int argc, char **argv) {
 }
 
 
-bool checkEndianness() {
+int checkEndianness() {
   int n = 1;
-  return !(*(char*)&n == 1);
+  return !(*(char*)&n == 1) ? 1 : 0;
 }
